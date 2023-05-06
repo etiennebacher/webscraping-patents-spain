@@ -79,3 +79,5 @@ for (i in seq_along(foo)) {
 }
 
 final <- as_tibble(rbindlist(foo, fill = TRUE))
+
+write.csv(final, "demo.csv")
