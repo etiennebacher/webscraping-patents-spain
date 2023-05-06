@@ -63,21 +63,20 @@ for (i in 1:nrow(GET_inputs)) {
 
 ##### Step 4: clean and put this in a unique data.frame
 
-foo <- GET_outputs
-for (i in seq_along(foo)) {
-  if (length(foo[[i]]) > 1) {
-    foo[[i]] <- rbindlist(foo[[i]])
+for (i in seq_along(GET_outputs)) {
+  if (length(GET_outputs[[i]]) > 1) {
+    GET_outputs[[i]] <- rbindlist(GET_outputs[[i]])
   } else {
-    foo[[i]] <- foo[[i]][[1]]
+    GET_outputs[[i]] <- GET_outputs[[i]][[1]]
   }
   
-  foo[[i]] <- foo[[i]] |> 
+  GET_outputs[[i]] <- GET_outputs[[i]] |> 
     pivot_wider(
       names_from = "X1",
       values_from = "X2"
     )
 }
 
-final <- as_tibble(rbindlist(foo, fill = TRUE))
+final <- as_tibble(rbindlist(GET_outputs, fill = TRUE))
 
 write.csv(final, "demo.csv")
